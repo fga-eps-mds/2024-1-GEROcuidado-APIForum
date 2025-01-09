@@ -1,5 +1,5 @@
 import { AppDataSource } from './src/data-source';
-
+// Configuracao do  migration
 AppDataSource.initialize()
   .then(async () => {
     console.log('Data Source initialized');
