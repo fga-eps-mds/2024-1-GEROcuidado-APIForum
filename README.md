@@ -63,6 +63,16 @@ Da mesma forma, alterar os valores das portas terminadas em **_x_** (i.e 3002 pa
     npm run typeorm:migrate src/migration/NOME_DA_MIGRATION
   ```
 
+  3. Caso as migrações não sejam realizadas pelos comandos anteriores, vale tentar:
+
+  ```bash
+  npx ts-node -r tsconfig-paths/register src/data-source.ts
+
+  npx ts-node run-migrations.ts
+  ```
+
+  Este código permite migrações novas e antigas serem realizadas.
+
 # Dicionário variáveis de ambiente
 
 | ENV         | Descrição              | Valor Padrão         |

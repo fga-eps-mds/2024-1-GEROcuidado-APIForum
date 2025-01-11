@@ -31,7 +31,7 @@ export class AutenticacaoGuard implements CanActivate {
 
     const request = this._client
       .send({ role: 'auth', cmd: 'check' }, { jwt })
-      .pipe(timeout(5000));
+      .pipe(timeout(7000));
     const response = await lastValueFrom(request);
 
     if (!response) {
