@@ -109,4 +109,8 @@ export class PublicacaoService {
     const found = await this._repository.findOneOrFail({ where: { id } });
     return this._repository.remove(found);
   }
+
+  async report(idPublicacao: number) {
+    const found = await this._repository.find({ where: { id: idPublicacao } });
+    return this._repository.save(found[0]);
 }

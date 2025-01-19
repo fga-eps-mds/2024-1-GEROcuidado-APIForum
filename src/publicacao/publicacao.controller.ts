@@ -62,4 +62,10 @@ export class PublicacaoController {
     const deleted = await this._service.remove(param.id);
     return new HttpResponse(deleted).onDeleted();
   }
+
+  @Post ('/report:id')
+  async report(@Param () param: IdValidator): Promise<Response<unknown>> {
+    const report = await this._service.report(param.id);
+    return new HttpResponse(report).onUpdated();
+  }
 }
