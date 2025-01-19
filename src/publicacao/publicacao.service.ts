@@ -114,3 +114,4 @@ export class PublicacaoService {
     const found = await this._repository.find({ where: { id: idPublicacao } });
     return this._repository.save(found[0]);
 }
+}
