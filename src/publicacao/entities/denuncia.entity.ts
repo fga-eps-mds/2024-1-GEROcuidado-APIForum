@@ -19,7 +19,10 @@ export class Denuncia {
     @Column('timestamp')
     dataHora!: Date;
 
-    @ManyToOne(() => Publicacao, (publicacao) => publicacao.denuncias)
-    @JoinColumn()
+  @ManyToOne(() => Publicacao, (publicacao) => publicacao.denuncias, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn()
     publicacao!: Publicacao;
 }
