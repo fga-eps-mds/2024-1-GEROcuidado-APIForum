@@ -25,6 +25,7 @@ services:
     container_name: gerocuidado-forum-db
     volumes:
       - './db/postgres:/var/lib/postgresql/data'
+      - pgdata:/var/lib/postgresql/data
       - './.docker/postgres/config/postgresql.conf:/etc/postgresql/postgresql.conf'
     environment:
       - POSTGRES_DB=gerocuidado-forum-db
@@ -41,3 +42,6 @@ networks:
   gerocuidado-apis-net:
     name: gerocuidado-apis-net
     external: true
+
+volumes:
+  pgdata:
