@@ -1,11 +1,11 @@
-import {Body, Controller, Post, BadRequestException, Get, Param} from '@nestjs/common';
-import { CreateDenunciaDto } from './dto/create-denuncia.dto';
+import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { DenunciaService } from './denuncia.service';
+import { CreateDenunciaDto } from './dto/create-denuncia.dto';
 import { Denuncia } from './entities/denuncia.entity';
 
 @Controller('denuncias')
 export class DenunciaController {
-  constructor(private readonly denunciaService: DenunciaService) {}
+  constructor(private readonly denunciaService: DenunciaService) { }
 
   @Post()
   async create(@Body() body: CreateDenunciaDto): Promise<Denuncia> {
@@ -24,13 +24,14 @@ export class DenunciaController {
     return await this.denunciaService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Denuncia> {
-    return await this.denunciaService.findOne(id);
+  @Get('byPublicacaoId/:id')
+  async findOne(@Param('id') id: number): Promise<Denuncia[]> {
+    const result = await this.denunciaService.findByPublicacaoId(id);
+
+    if (!result || result.length === 0) {
+      throw new BadRequestException('Denúncia não encontrada.');
+    }
+
+    return result;
   }
-
-
 }
-
-
-

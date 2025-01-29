@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutenticacaoGuard } from './autenticacao.guard';
 import { DbModule } from './config/db/db.module';
 import { DbService } from './config/db/db.service';
+import { DenunciaModule } from './publicacao/denuncia.module';
 import { PublicacaoModule } from './publicacao/publicacao.module';
 
 const ENV = process.env.NODE_ENV;
@@ -36,6 +37,7 @@ const ENV = process.env.NODE_ENV;
     ]),
     DbModule,
     PublicacaoModule,
+    DenunciaModule
   ],
   controllers: [],
   providers: [
@@ -45,4 +47,4 @@ const ENV = process.env.NODE_ENV;
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

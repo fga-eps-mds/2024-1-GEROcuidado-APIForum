@@ -1,8 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ECategoriaPublicacao } from '../classes/categoria-publicacao.enum';
 import { CreatePublicacaoDto } from '../dto/create-publicacao.dto';
 import { UpdatePublicacaoDto } from '../dto/update-publicacao.dto';
- // import { Denuncia } from './denuncia.entity';
+import { Denuncia } from './denuncia.entity';
 
 @Entity({ name: 'publicacao' })
 export class Publicacao {
@@ -30,12 +36,11 @@ export class Publicacao {
   @Column('integer', { array: true, default: [] })
   idUsuarioReporte!: number[];
 
-  // @OneToMany(() => Denuncia, (denuncia) => denuncia.publicacao)
-  // @JoinColumn()
- // denuncias!: Denuncia[];
+  @OneToMany(() => Denuncia, (denuncia) => denuncia.publicacao)
+  @JoinColumn()
+  denuncias!: Denuncia[];
 
   constructor(createPublicacaoDto: CreatePublicacaoDto | UpdatePublicacaoDto) {
     Object.assign(this, createPublicacaoDto);
   }
-
 }

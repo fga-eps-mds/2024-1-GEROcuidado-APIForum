@@ -1,10 +1,10 @@
-import {Inject, Injectable, forwardRef} from "@nestjs/common";
+import { Inject, Injectable, forwardRef } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Denuncia } from "./entities/denuncia.entity";
+import { PublicacaoService } from "../publicacao/publicacao.service";
 import { CreateDenunciaDto } from "./dto/create-denuncia.dto";
 import { UpdateDenunciaDto } from "./dto/update-denuncia.dto";
-import { PublicacaoService } from "../publicacao/publicacao.service";
+import { Denuncia } from "./entities/denuncia.entity";
 
 @Injectable()
 export class DenunciaService {
@@ -14,7 +14,7 @@ export class DenunciaService {
 
     @Inject(forwardRef(() => PublicacaoService))
     private readonly _publicacaoService: PublicacaoService, // Injeção do serviço de publicação
-  ) {}
+  ) { }
 
   /**
    * Cria uma denúncia para uma publicação com base em um DTO.
@@ -50,6 +50,14 @@ export class DenunciaService {
    */
   async findOne(id: number): Promise<Denuncia> {
     return this._repository.findOneOrFail({ where: { id } });
+  }
+
+  /**
+   * Busca todas as denúncias de uma publicação.
+   * @param publicacaoId ID da publicação.
+   */
+  async findByPublicacaoId(publicacaoId: number): Promise<Denuncia[]> {
+    return this._repository.find({ where: { publicacao: { id: publicacaoId } } });
   }
 
   /**
