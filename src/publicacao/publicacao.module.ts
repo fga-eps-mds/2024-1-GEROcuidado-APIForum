@@ -27,6 +27,6 @@ import { PublicacaoService } from './publicacao.service';
   ],
   controllers: [PublicacaoController],
   providers: [PublicacaoService, Repository],
-  exports: [PublicacaoService],
+  exports: [PublicacaoService, ClientsModule],
 })
 export class PublicacaoModule {}

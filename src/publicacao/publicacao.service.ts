@@ -26,7 +26,7 @@ export class PublicacaoService {
     private readonly _repository: Repository<Publicacao>,
     @Inject('USUARIO_CLIENT')
     private readonly _client: ClientProxy,
-  ) {}
+  ) { }
 
   async create(body: CreatePublicacaoDto): Promise<Publicacao> {
     const publicacao = new Publicacao(body);
