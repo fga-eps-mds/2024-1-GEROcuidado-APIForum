@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {  IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateDenunciaDto {
   @IsNotEmpty()
@@ -20,6 +20,7 @@ export class CreateDenunciaDto {
   @IsNotEmpty()
   @IsNumber()
   publicacaoId!: number;
+
 
 }
 
