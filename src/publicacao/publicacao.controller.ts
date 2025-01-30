@@ -53,7 +53,9 @@ export class PublicacaoController {
 
   @Post()
   async create(@Body() body: CreatePublicacaoDto) {
+    console.log("Dados recebidos no Controller:", body);
     const created = await this._service.create(body);
+    console.log("Dados recebidos:", created);
     return new HttpResponse<Publicacao>(created).onCreated();
   }
 

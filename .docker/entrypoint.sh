@@ -10,6 +10,7 @@ echo "---------------Run migrations---------------"
 
 npm run typeorm:run
 
+
 echo "---------------Run migrations - END---------"
 
 npm run start:debug

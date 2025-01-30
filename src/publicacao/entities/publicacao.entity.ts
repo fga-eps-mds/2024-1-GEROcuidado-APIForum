@@ -31,11 +31,11 @@ export class Publicacao {
   idUsuarioReporte!: number[];
 
   @OneToMany(() => Denuncia, (denuncia: Denuncia) => denuncia.publicacao)
+
   @JoinColumn()
   denuncias!: Denuncia[];
 
   constructor(createPublicacaoDto: CreatePublicacaoDto | UpdatePublicacaoDto) {
     Object.assign(this, createPublicacaoDto);
   }
-
 }
