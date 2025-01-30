@@ -1,7 +1,6 @@
 import { Body, Controller, Post, BadRequestException, Get, Param, Put, Delete } from '@nestjs/common';
 import { CreateDenunciaDto } from './dto/create-denuncia.dto';
 import { DenunciaService } from './denuncia.service';
-import { CreateDenunciaDto } from './dto/create-denuncia.dto';
 import { Denuncia } from './entities/denuncia.entity';
 import { UpdateDenunciaDto } from '../publicacao/dto/update-denuncia.dto';
 import { Paginate, Pagination } from '../shared/decorators/paginate.decorator';
