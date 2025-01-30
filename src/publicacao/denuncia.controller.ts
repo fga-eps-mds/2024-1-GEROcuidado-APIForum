@@ -62,20 +62,18 @@ export class DenunciaController {
    * Remove uma denúncia dado o ID.
    * @param id ID da denúncia a ser removida.
    */
-  @Delete(':id')
-  async remove(@Param('id') id: number): Promise<{ message: string }> {
-    try {
-      await this.denunciaService.remove(id);
-      return { message: `Denúncia com ID ${id} removida com sucesso.` };
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new BadRequestException(error.message);
-      }
-      throw new BadRequestException('Ocorreu um erro desconhecido ao remover.');
+@Delete(':id')
+async remove(@Param('id') id: number): Promise<{ message: string }> {
+  try {
+    await this.denunciaService.remove(id);
+    return { message: `Denúncia com ID ${id} removida com sucesso.` };
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new BadRequestException(error.message);
     }
+    throw new BadRequestException('Ocorreu um erro desconhecido ao remover.');
   }
+}
 
-
-    return result;
-  }
+return result; // Código solto, causando erro
 }
