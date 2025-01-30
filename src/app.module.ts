@@ -8,7 +8,6 @@ import { DbModule } from './config/db/db.module';
 import { DbService } from './config/db/db.service';
 import { DenunciaModule } from './publicacao/denuncia.module';
 import { PublicacaoModule } from './publicacao/publicacao.module';
-import {DenunciaModule} from "./publicacao/denuncia.module";
 
 const ENV = process.env.NODE_ENV;
 
