@@ -4,7 +4,11 @@ import { Repository } from "typeorm";
 import { PublicacaoService } from "../publicacao/publicacao.service";
 import { CreateDenunciaDto } from "./dto/create-denuncia.dto";
 import { UpdateDenunciaDto } from "./dto/update-denuncia.dto";
-import { Denuncia } from "./entities/denuncia.entity";
+import { PublicacaoService } from "../publicacao/publicacao.service";
+import { Ordering } from '../shared/decorators/ordenate.decorator';
+import { Pagination } from '../shared/decorators/paginate.decorator';
+import { ResponsePaginate } from '../shared/interfaces/response-paginate.interface';
+
 
 @Injectable()
 export class DenunciaService {
@@ -38,11 +42,36 @@ export class DenunciaService {
 
 
   /**
-   * Lista todas as denúncias.
+   * Obtém uma lista paginada de denúncias com base em critérios de ordenação e paginação.
+   * @param ordering Critérios de ordenação.
+   * @param paging Critérios de paginação.
+   * @returns Retorna uma resposta paginada contendo a lista de denúncias.
    */
-  async findAll(): Promise<Denuncia[]> {
-    return this._repository.find();
+  async findAll(
+    ordering: Ordering,
+    paging: Pagination,
+  ): Promise<ResponsePaginate<Denuncia[]>> {
+    const limit = paging.limit;
+    const offset = paging.offset;
+    const sort = ordering.column;
+    const order = ordering.dir.toUpperCase() as 'ASC' | 'DESC';
+
+    const [result, total] = await this._repository
+      .createQueryBuilder('denuncia')
+      .leftJoinAndSelect('denuncia.publicacao', 'publicacao')
+      .limit(limit)
+      .offset(offset)
+      .orderBy(`"${sort}"`, order)
+      .getManyAndCount();
+
+
+    return {
+      data: result,
+      count: +total,
+      pageSize: +limit,
+    };
   }
+
 
   /**
    * Busca uma denúncia específica pelo ID.

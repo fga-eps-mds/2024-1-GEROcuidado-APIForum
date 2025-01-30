@@ -1,5 +1,6 @@
-export class UpdateDenunciaDto {
-  motivo?: string; // Motivo da denúncia (opcional para update)
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateDenunciaDto } from '../dto/create-denuncia.dto';
 
-  descricao?: string; // Descrição da denúncia (opcional para update)
+
+export class UpdateDenunciaDto extends PartialType(CreateDenunciaDto) {
 }

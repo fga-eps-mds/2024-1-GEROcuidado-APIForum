@@ -12,6 +12,8 @@ for (const k in envConfig) {
   process.env[k] = envConfig[k];
 }
 
+
+
 const config: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST || 'localhost',
@@ -27,6 +29,8 @@ const config: DataSourceOptions = {
   migrations: [__dirname + '/migration/**/*{.ts,.js}'],
 };
 
-export default new DataSource(config);
+const appDataSource = new DataSource(config);
+
+export default appDataSource;
 
 export const typeOrmConfig: TypeOrmModuleOptions = config;

@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ECategoriaPublicacao } from '../classes/categoria-publicacao.enum';
 import { CreatePublicacaoDto } from '../dto/create-publicacao.dto';
 import { UpdatePublicacaoDto } from '../dto/update-publicacao.dto';
@@ -36,7 +30,8 @@ export class Publicacao {
   @Column('integer', { array: true, default: [] })
   idUsuarioReporte!: number[];
 
-  @OneToMany(() => Denuncia, (denuncia) => denuncia.publicacao)
+  @OneToMany(() => Denuncia, (denuncia: Denuncia) => denuncia.publicacao)
+
   @JoinColumn()
   denuncias!: Denuncia[];
 
