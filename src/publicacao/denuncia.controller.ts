@@ -74,6 +74,4 @@ async remove(@Param('id') id: number): Promise<{ message: string }> {
     throw new BadRequestException('Ocorreu um erro desconhecido ao remover.');
   }
 }
-
-return result; // Código solto, causando erro
 }
