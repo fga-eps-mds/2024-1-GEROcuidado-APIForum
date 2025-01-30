@@ -5,6 +5,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutenticacaoGuard } from './autenticacao.guard';
 import { DbModule } from './config/db/db.module';
+import { DbService } from './config/db/db.service';
 import { DenunciaModule } from './publicacao/denuncia.module';
 import { PublicacaoModule } from './publicacao/publicacao.module';
 
@@ -17,7 +18,7 @@ const ENV = process.env.NODE_ENV;
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule], // Remova DbModule
+      imports: [ConfigModule, DbModule],
       useClass: DbService,
     }),
     ClientsModule.registerAsync([
@@ -34,8 +35,10 @@ const ENV = process.env.NODE_ENV;
         inject: [ConfigService],
       },
     ]),
+    DbModule,
     PublicacaoModule,
     DenunciaModule,
+
   ],
   controllers: [],
   providers: [
@@ -45,4 +48,4 @@ const ENV = process.env.NODE_ENV;
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }
