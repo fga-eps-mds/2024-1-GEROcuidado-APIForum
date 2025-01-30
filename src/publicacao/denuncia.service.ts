@@ -1,7 +1,7 @@
 import { Inject, Injectable, forwardRef } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Denuncia } from '../entities/denuncia.entity';
+import { Denuncia } from './entities/denuncia.entity';
 import { PublicacaoService } from "../publicacao/publicacao.service";
 import { CreateDenunciaDto } from "./dto/create-denuncia.dto";
 import { UpdateDenunciaDto } from "./dto/update-denuncia.dto";
