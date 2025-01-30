@@ -18,7 +18,7 @@ const ENV = process.env.NODE_ENV;
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule, DbModule],
+      imports: [ConfigModule], // Remova DbModule
       useClass: DbService,
     }),
     ClientsModule.registerAsync([
@@ -35,10 +35,8 @@ const ENV = process.env.NODE_ENV;
         inject: [ConfigService],
       },
     ]),
-    DbModule,
     PublicacaoModule,
     DenunciaModule,
-
   ],
   controllers: [],
   providers: [
@@ -48,4 +46,4 @@ const ENV = process.env.NODE_ENV;
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}
