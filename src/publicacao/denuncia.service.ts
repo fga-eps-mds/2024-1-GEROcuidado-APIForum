@@ -5,7 +5,6 @@ import { Denuncia } from '../entities/denuncia.entity';
 import { PublicacaoService } from "../publicacao/publicacao.service";
 import { CreateDenunciaDto } from "./dto/create-denuncia.dto";
 import { UpdateDenunciaDto } from "./dto/update-denuncia.dto";
-import { PublicacaoService } from "../publicacao/publicacao.service";
 import { Ordering } from '../shared/decorators/ordenate.decorator';
 import { Pagination } from '../shared/decorators/paginate.decorator';
 import { ResponsePaginate } from '../shared/interfaces/response-paginate.interface';
