@@ -17,7 +17,7 @@ const ENV = process.env.NODE_ENV;
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule, DbModule],
+      imports: [ConfigModule],
       useClass: DbService,
     }),
     ClientsModule.registerAsync([
