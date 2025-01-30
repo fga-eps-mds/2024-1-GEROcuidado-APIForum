@@ -4,7 +4,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutenticacaoGuard } from './autenticacao.guard';
-import { DbModule } from './config/db/db.module';
 import { DbService } from './config/db/db.service';
 import { DenunciaModule } from './publicacao/denuncia.module';
 import { PublicacaoModule } from './publicacao/publicacao.module';
@@ -35,7 +34,6 @@ const ENV = process.env.NODE_ENV;
         inject: [ConfigService],
       },
     ]),
-    DbModule,
     PublicacaoModule,
     DenunciaModule,
 
