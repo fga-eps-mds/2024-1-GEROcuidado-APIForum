@@ -7,10 +7,6 @@ export class CreateComentarioDto {
 
   @IsNotEmpty()
   @IsString()
-  motivo!: string;
-
-  @IsNotEmpty()
-  @IsString()
   comentarioTexto!: string;
 
   @IsNotEmpty()
