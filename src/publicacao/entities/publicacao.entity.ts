@@ -4,7 +4,6 @@ import { CreatePublicacaoDto } from '../dto/create-publicacao.dto';
 import { UpdatePublicacaoDto } from '../dto/update-publicacao.dto';
 import { Comentario } from './comentario.entity';
 import { Denuncia } from './denuncia.entity';
-import { Comentario } from './comentario.entity';
 
 @Entity({ name: 'publicacao' })
 export class Publicacao {
