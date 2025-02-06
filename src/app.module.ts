@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientsModule, Transport } from '@nestjs/microservices'
+import { ComentariosModule } from './publicacao/comentario.module';;
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutenticacaoGuard } from './autenticacao.guard';
 import { DenunciaModule } from './publicacao/denuncia.module';
@@ -46,6 +47,7 @@ const ENV = process.env.NODE_ENV;
     ]),
     PublicacaoModule,
     DenunciaModule,
+    ComentariosModule,
 
   ],
   controllers: [],

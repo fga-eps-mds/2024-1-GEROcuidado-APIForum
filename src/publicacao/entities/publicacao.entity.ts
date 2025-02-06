@@ -3,6 +3,7 @@ import { ECategoriaPublicacao } from '../classes/categoria-publicacao.enum';
 import { CreatePublicacaoDto } from '../dto/create-publicacao.dto';
 import { UpdatePublicacaoDto } from '../dto/update-publicacao.dto';
 import { Denuncia } from './denuncia.entity';
+import { Comentario } from './comentario.entity';
 
 @Entity({ name: 'publicacao' })
 export class Publicacao {
@@ -34,6 +35,9 @@ export class Publicacao {
 
   @JoinColumn()
   denuncias!: Denuncia[];
+
+  @OneToMany(() => Comentario, (comentario: Comentario) => comentario.publicacao)
+  comentarios!: Comentario[];
 
   constructor(createPublicacaoDto: CreatePublicacaoDto | UpdatePublicacaoDto) {
     Object.assign(this, createPublicacaoDto);
