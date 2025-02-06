@@ -43,7 +43,6 @@ export class ComentariosService {
       .orderBy(`"${sort}"`, order)
       .getManyAndCount();
 
-
     return {
       data: result,
       count: +total,
