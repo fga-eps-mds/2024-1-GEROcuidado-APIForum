@@ -5,7 +5,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
 import { ComentariosModule } from './publicacao/comentario.module';;
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutenticacaoGuard } from './autenticacao.guard';
+<<<<<<< HEAD
 import { DenunciaModule } from './publicacao/denuncia.module';
+=======
+// import { DenunciaModule } from './publicacao/denuncia.module';
+>>>>>>> cb4ab5a6c79c8058d52de8d6a35f4cb0d93eea05
 import { PublicacaoModule } from './publicacao/publicacao.module';
 
 const ENV = process.env.NODE_ENV;
@@ -48,7 +52,6 @@ const ENV = process.env.NODE_ENV;
     PublicacaoModule,
     DenunciaModule,
     ComentariosModule,
-
   ],
   controllers: [],
   providers: [

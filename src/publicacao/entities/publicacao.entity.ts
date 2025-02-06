@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 't
 import { ECategoriaPublicacao } from '../classes/categoria-publicacao.enum';
 import { CreatePublicacaoDto } from '../dto/create-publicacao.dto';
 import { UpdatePublicacaoDto } from '../dto/update-publicacao.dto';
+import { Comentario } from './comentario.entity';
 import { Denuncia } from './denuncia.entity';
 import { Comentario } from './comentario.entity';
 
