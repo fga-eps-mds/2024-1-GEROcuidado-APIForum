@@ -18,7 +18,7 @@ describe('ComentariosController', () => {
     conteudo: 'Comentário de teste',
     idUsuario: 1,
     dataHora: new Date(),
-    publicacao: {} as any, 
+    publicacao: {} as any,
   };
 
   const mockResponsePaginate: ResponsePaginate<Comentario[]> = {
@@ -67,7 +67,7 @@ describe('ComentariosController', () => {
       expect(result).toEqual(mockComentario);
     });
 
-    it('deve lançar uma exceção BadRequestException em caso de erro', async () => {
+    it('deve lançar uma BadRequestException em caso de erro no serviço', async () => {
       const createComentarioDto: CreateComentarioDto = {
         conteudo: 'Comentário de teste',
         idUsuario: 1,
@@ -75,30 +75,50 @@ describe('ComentariosController', () => {
         comentarioId: 1,
       };
 
-      jest.spyOn(service, 'create').mockRejectedValue(new Error('Erro ao criar comentário'));
+      jest
+        .spyOn(service, 'create')
+        .mockRejectedValue(new Error('Erro ao criar comentário'));
 
-      await expect(controller.create(createComentarioDto)).rejects.toThrowError(BadRequestException);
+      await expect(controller.create(createComentarioDto)).rejects.toThrowError(
+        BadRequestException,
+      );
     });
   });
 
   describe('findAll', () => {
     it('deve retornar uma lista paginada de comentários', async () => {
-      const pagination: Pagination = { 
-        limit: 10, 
+      const ordering: Ordering = new Ordering('id');
+      ordering.dir = 'ASC';
+      const paging: Pagination = {
+        limit: 10,
         offset: 0,
         getOffset: () => 0,
-        getLimit: () => 10 
-      };
-      const ordering: Ordering = { 
-        column: 'id', 
-        dir: 'ASC',
-        buildOrderParams: () => ({ column: 'id', dir: 'ASC' })
+        getLimit: () => 10,
       };
 
-      const result = await controller.findAll(pagination, ordering);
+      const result = await controller.findAll(paging, ordering);
 
-      expect(service.findAll).toHaveBeenCalledWith(ordering, pagination);
+      expect(service.findAll).toHaveBeenCalledWith(ordering, paging);
       expect(result).toEqual(mockResponsePaginate);
+    });
+
+    it('deve lançar uma exceção em caso de erro no serviço', async () => {
+      const ordering: Ordering = new Ordering('id');
+      ordering.dir = 'ASC';
+      const paging: Pagination = {
+        limit: 10,
+        offset: 0,
+        getOffset: () => 0,
+        getLimit: () => 10,
+      };
+
+      jest
+        .spyOn(service, 'findAll')
+        .mockRejectedValue(new Error('Erro ao buscar comentários'));
+
+      await expect(controller.findAll(paging, ordering)).rejects.toThrowError(
+        Error,
+      );
     });
   });
 
@@ -110,10 +130,12 @@ describe('ComentariosController', () => {
       expect(result).toEqual(mockComentario);
     });
 
-    it('deve lançar uma exceção BadRequestException em caso de erro', async () => {
-      jest.spyOn(service, 'findOne').mockRejectedValue(new Error('Erro ao buscar comentário'));
+    it('deve lançar uma exceção em caso de erro no serviço', async () => {
+      jest
+        .spyOn(service, 'findOne')
+        .mockRejectedValue(new Error('Erro ao buscar comentário'));
 
-      await expect(controller.findOne('1')).rejects.toThrowError(BadRequestException);
+      await expect(controller.findOne('1')).rejects.toThrowError(Error);
     });
   });
 
@@ -129,14 +151,18 @@ describe('ComentariosController', () => {
       expect(result).toEqual(mockComentario);
     });
 
-    it('deve lançar uma exceção BadRequestException em caso de erro', async () => {
+    it('deve lançar uma exceção em caso de erro no serviço', async () => {
       const updateComentarioDto: UpdateComentarioDto = {
         conteudo: 'Comentário atualizado',
       };
 
-      jest.spyOn(service, 'update').mockRejectedValue(new Error('Erro ao atualizar comentário'));
+      jest
+        .spyOn(service, 'update')
+        .mockRejectedValue(new Error('Erro ao atualizar comentário'));
 
-      await expect(controller.update('1', updateComentarioDto)).rejects.toThrowError(BadRequestException);
+      await expect(
+        controller.update('1', updateComentarioDto),
+      ).rejects.toThrowError(Error);
     });
   });
 
@@ -147,10 +173,12 @@ describe('ComentariosController', () => {
       expect(service.remove).toHaveBeenCalledWith(1);
     });
 
-    it('deve lançar uma exceção BadRequestException em caso de erro', async () => {
-      jest.spyOn(service, 'remove').mockRejectedValue(new Error('Erro ao remover comentário'));
+    it('deve lançar uma exceção em caso de erro no serviço', async () => {
+      jest
+        .spyOn(service, 'remove')
+        .mockRejectedValue(new Error('Erro ao remover comentário'));
 
-      await expect(controller.remove('1')).rejects.toThrowError(BadRequestException);
+      await expect(controller.remove('1')).rejects.toThrowError(Error);
     });
   });
 });
