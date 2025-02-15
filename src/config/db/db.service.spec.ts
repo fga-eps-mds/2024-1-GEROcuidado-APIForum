@@ -46,7 +46,7 @@ describe('DbService', () => {
 
     process.env.NODE_ENV = 'development';
 
-    const host = 'localhost';
+    const host = 'gerocuida';
     const logging = false;
     const username = 'username';
     const password = 'password';

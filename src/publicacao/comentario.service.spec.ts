@@ -63,6 +63,24 @@ describe('ComentariosService', () => {
     expect(service).toBeDefined();
   });
 
+  describe('create', () => {
+    it('deve criar um comentário com sucesso', async () => {
+      const createComentarioDto = {
+        conteudo: 'Comentário de teste',
+        idUsuario: 1,
+        idPublicacao: 1,
+        dataHora: new Date().toISOString(),
+        comentarioId: 1,
+      };
+
+      const result = await service.create(createComentarioDto);
+
+      expect(comentarioRepository.create).toHaveBeenCalledWith(createComentarioDto);
+      expect(comentarioRepository.save).toHaveBeenCalledWith(mockComentario);
+      expect(result).toEqual(mockComentario);
+    });
+  });
+
   describe('findAll', () => {
     it('deve retornar uma lista paginada de comentários', async () => {
       const ordering: Ordering = new Ordering('id');
@@ -102,6 +120,49 @@ describe('ComentariosService', () => {
         count: 1, // Total de registros
         pageSize: paging.limit, // Tamanho da página
       });
+    });
+  });
+
+  describe('findOne', () => {
+    it('deve retornar um comentário com informações do usuário', async () => {
+      const result = await service.findOne(1);
+
+      expect(comentarioRepository.findOneOrFail).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
+      expect(result).toEqual({
+        ...mockComentario,
+        usuario: mockUsuario,
+      });
+    });
+
+    it('deve lançar uma exceção NotFoundException se o comentário não for encontrado', async () => {
+      jest.spyOn(comentarioRepository, 'findOneOrFail').mockRejectedValue(new Error());
+
+      await expect(service.findOne(999)).rejects.toThrowError();
+    });
+  });
+
+  describe('update', () => {
+    it('deve atualizar um comentário com sucesso', async () => {
+      const updateComentarioDto = { conteudo: 'Comentário atualizado' };
+
+      const result = await service.update(1, updateComentarioDto);
+
+      expect(comentarioRepository.merge).toHaveBeenCalledWith(mockComentario, updateComentarioDto);
+      expect(comentarioRepository.save).toHaveBeenCalledWith(mockComentario);
+      expect(result).toEqual(mockComentario);
+    });
+  });
+
+  describe('remove', () => {
+    it('deve remover um comentário com sucesso', async () => {
+      await service.remove(1);
+
+      expect(comentarioRepository.findOneOrFail).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
+      expect(comentarioRepository.remove).toHaveBeenCalledWith(mockComentario);
     });
   });
 });
