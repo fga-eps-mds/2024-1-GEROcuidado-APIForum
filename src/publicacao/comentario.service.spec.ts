@@ -1,4 +1,3 @@
-import { ClientProxy } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { of } from 'rxjs';
@@ -11,7 +10,6 @@ import { Comentario } from './entities/comentario.entity';
 describe('ComentariosService', () => {
   let service: ComentariosService;
   let comentarioRepository: Repository<Comentario>;
-  let clientProxy: ClientProxy;
 
   const mockComentario = {
     id: 1,
@@ -59,7 +57,6 @@ describe('ComentariosService', () => {
     comentarioRepository = module.get<Repository<Comentario>>(
       getRepositoryToken(Comentario),
     );
-    clientProxy = module.get<ClientProxy>('USUARIO_CLIENT');
   });
 
   it('deve estar definido', () => {

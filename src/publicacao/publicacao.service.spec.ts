@@ -3,11 +3,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { of } from 'rxjs';
 import { Repository } from 'typeorm';
-import { OrderParams, Ordering } from '../shared/decorators/ordenate.decorator';
-import {
-  Pagination,
-  PaginationParams,
-} from '../shared/decorators/paginate.decorator';
+import { Ordering, OrderParams } from '../shared/decorators/ordenate.decorator';
+import { Pagination, PaginationParams } from '../shared/decorators/paginate.decorator';
 import { Publicacao } from './entities/publicacao.entity';
 import { PublicacaoService } from './publicacao.service';
 
@@ -26,22 +23,22 @@ describe('PublicacaoService', () => {
       limit: jest.fn().mockReturnThis(),
       offset: jest.fn().mockReturnThis(),
       orderBy: jest.fn().mockReturnThis(),
-      getManyAndCount: jest.fn(),
+      getManyAndCount: jest.fn().mockResolvedValue([[], 0]),
     })),
   };
 
   const mockClientProxy = {
-    send: jest.fn(),
+    send: jest.fn().mockReturnValue(of([{ id: 1, nome: 'Usuário Teste' }])), // Retorna um array de usuários
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
+        PublicacaoService,
         {
           provide: getRepositoryToken(Publicacao),
           useValue: mockRepository,
         },
-        PublicacaoService,
         {
           provide: 'USUARIO_CLIENT',
           useValue: mockClientProxy,
@@ -50,10 +47,8 @@ describe('PublicacaoService', () => {
     }).compile();
 
     service = module.get<PublicacaoService>(PublicacaoService);
+    repository = module.get<Repository<Publicacao>>(getRepositoryToken(Publicacao));
     clientProxy = module.get<ClientProxy>('USUARIO_CLIENT');
-    repository = module.get<Repository<Publicacao>>(
-      getRepositoryToken(Publicacao),
-    );
   });
 
   it('should be defined', () => {
@@ -62,36 +57,33 @@ describe('PublicacaoService', () => {
 
   it('should create Publicacao', async () => {
     const publi = { titulo: 'titulo' } as any;
-    jest.spyOn(repository, 'save').mockReturnValue({ id: 1 } as any);
+    jest.spyOn(repository, 'save').mockResolvedValue({ id: 1 } as any);
     const created = await service.create(publi);
     expect(created.id).toEqual(1);
   });
 
   it('should find Publicacao', async () => {
-    jest.spyOn(repository, 'findOneOrFail').mockReturnValue({ id: 1 } as any);
-    jest.spyOn(clientProxy, 'send').mockReturnValue(of({ id: 1 }) as any);
+    jest.spyOn(repository, 'findOneOrFail').mockResolvedValue({ id: 1 } as any);
+    jest.spyOn(clientProxy, 'send').mockReturnValue(of({ id: 1 }));
 
     const found = await service.findOne(1);
     expect(found.id).toEqual(1);
   });
 
   it('should remove Publicacao', async () => {
-    jest.spyOn(repository, 'findOneOrFail').mockReturnValue({ id: 1 } as any);
-    jest.spyOn(repository, 'remove').mockReturnValue({ id: 1 } as any);
+    jest.spyOn(repository, 'findOneOrFail').mockResolvedValue({ id: 1 } as any);
+    jest.spyOn(repository, 'remove').mockResolvedValue({ id: 1 } as any);
 
     const removed = await service.remove(1);
     expect(removed.id).toEqual(1);
   });
 
   it('should update Publicacao', async () => {
-    jest.spyOn(clientProxy, 'send').mockReturnValue(of({ id: 1 }) as any);
-    jest.spyOn(repository, 'findOneOrFail').mockReturnValue({ id: 1 } as any);
-    jest
-      .spyOn(repository, 'save')
-      .mockReturnValue({ id: 1, titulo: 'titulo 2' } as any);
+    jest.spyOn(repository, 'findOneOrFail').mockResolvedValue({ id: 1 } as any);
+    jest.spyOn(repository, 'save').mockResolvedValue({ id: 1, titulo: 'titulo 2' } as any);
 
-    const found = await service.update(1, { titulo: 'titulo 2' });
-    expect(found).toEqual({ id: 1, titulo: 'titulo 2' });
+    const updated = await service.update(1, { titulo: 'titulo 2' });
+    expect(updated).toEqual({ id: 1, titulo: 'titulo 2' });
   });
 
   describe('findAll', () => {
@@ -99,6 +91,7 @@ describe('PublicacaoService', () => {
       id: 1,
       titulo: 'título',
       descricao: 'descricao',
+      idUsuario: 1, // Adicionado idUsuario para o teste
     };
 
     const order: OrderParams = {
@@ -114,40 +107,29 @@ describe('PublicacaoService', () => {
     const pagination: Pagination = new Pagination(paginate);
 
     it('should findAll Publicacao', async () => {
-      jest.spyOn(clientProxy, 'send').mockReturnValue(of([{ id: 1 }]) as any);
       jest.spyOn(repository, 'createQueryBuilder').mockReturnValue({
-        where: () => ({
-          limit: () => ({
-            offset: () => ({
-              orderBy: () => ({
-                getManyAndCount: jest
-                  .fn()
-                  .mockResolvedValueOnce([[publicacao], 1]),
-              }),
-            }),
-          }),
-        }),
+        where: jest.fn().mockReturnThis(),
+        limit: jest.fn().mockReturnThis(),
+        offset: jest.fn().mockReturnThis(),
+        orderBy: jest.fn().mockReturnThis(),
+        getManyAndCount: jest.fn().mockResolvedValue([[publicacao], 1]),
       } as any);
 
       const { data, count } = await service.findAll({}, ordering, pagination);
       expect(count).toEqual(1);
-      expect(data[0]).toEqual(publicacao);
+      expect(data[0]).toEqual({
+        ...publicacao,
+        usuario: { id: 1, nome: 'Usuário Teste' }, // Usuário mockado
+      });
     });
 
     it('should findAll Publicacao with isReported', async () => {
-      jest.spyOn(clientProxy, 'send').mockReturnValue(of([{ id: 1 }]) as any);
       jest.spyOn(repository, 'createQueryBuilder').mockReturnValue({
-        where: () => ({
-          limit: () => ({
-            offset: () => ({
-              orderBy: () => ({
-                getManyAndCount: jest
-                  .fn()
-                  .mockResolvedValueOnce([[publicacao], 1]),
-              }),
-            }),
-          }),
-        }),
+        where: jest.fn().mockReturnThis(),
+        limit: jest.fn().mockReturnThis(),
+        offset: jest.fn().mockReturnThis(),
+        orderBy: jest.fn().mockReturnThis(),
+        getManyAndCount: jest.fn().mockResolvedValue([[publicacao], 1]),
       } as any);
 
       const { data, count } = await service.findAll(
@@ -156,23 +138,19 @@ describe('PublicacaoService', () => {
         pagination,
       );
       expect(count).toEqual(1);
-      expect(data[0]).toEqual(publicacao);
+      expect(data[0]).toEqual({
+        ...publicacao,
+        usuario: { id: 1, nome: 'Usuário Teste' }, 
+      });
     });
 
     it('should findAll Publicacao with title unaccent', async () => {
-      jest.spyOn(clientProxy, 'send').mockReturnValue(of([{ id: 1 }]) as any);
       jest.spyOn(repository, 'createQueryBuilder').mockReturnValue({
-        where: () => ({
-          limit: () => ({
-            offset: () => ({
-              orderBy: () => ({
-                getManyAndCount: jest
-                  .fn()
-                  .mockResolvedValueOnce([[publicacao], 1]),
-              }),
-            }),
-          }),
-        }),
+        where: jest.fn().mockReturnThis(),
+        limit: jest.fn().mockReturnThis(),
+        offset: jest.fn().mockReturnThis(),
+        orderBy: jest.fn().mockReturnThis(),
+        getManyAndCount: jest.fn().mockResolvedValue([[publicacao], 1]),
       } as any);
 
       const { data, count } = await service.findAll(
@@ -181,7 +159,10 @@ describe('PublicacaoService', () => {
         pagination,
       );
       expect(count).toEqual(1);
-      expect(data[0]).toEqual(publicacao);
+      expect(data[0]).toEqual({
+        ...publicacao,
+        usuario: { id: 1, nome: 'Usuário Teste' }, 
+      });
     });
   });
 });
