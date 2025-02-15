@@ -23,6 +23,11 @@ describe('ComentariosService', () => {
     nome: 'Usuário Teste',
   };
 
+  const mockComentarioWithUsuario = {
+    ...mockComentario,
+    usuario: mockUsuario,
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -30,11 +35,18 @@ describe('ComentariosService', () => {
         {
           provide: getRepositoryToken(Comentario),
           useValue: {
-            create: jest.fn().mockReturnValue(mockComentario),
-            save: jest.fn().mockResolvedValue(mockComentario),
-            findOneOrFail: jest.fn().mockResolvedValue(mockComentario),
-            merge: jest.fn().mockReturnValue(mockComentario),
-            remove: jest.fn().mockResolvedValue(mockComentario),
+            create: jest.fn().mockReturnValue(mockComentario), // Retorna o comentário sem usuário
+            save: jest.fn().mockImplementation((comentario) => {
+              // Retorna o comentário sem usuário para o método `create`
+              if (comentario === mockComentario) {
+                return Promise.resolve(mockComentario);
+              }
+              // Retorna o comentário com usuário para outros métodos
+              return Promise.resolve(mockComentarioWithUsuario);
+            }),
+            findOneOrFail: jest.fn().mockResolvedValue(mockComentarioWithUsuario), // Retorna o comentário com usuário
+            merge: jest.fn().mockReturnValue(mockComentarioWithUsuario), // Retorna o comentário com usuário
+            remove: jest.fn().mockResolvedValue(mockComentarioWithUsuario), // Retorna o comentário com usuário
             createQueryBuilder: jest.fn(() => ({
               leftJoinAndSelect: jest.fn().mockReturnThis(),
               limit: jest.fn().mockReturnThis(),
@@ -130,10 +142,7 @@ describe('ComentariosService', () => {
       expect(comentarioRepository.findOneOrFail).toHaveBeenCalledWith({
         where: { id: 1 },
       });
-      expect(result).toEqual({
-        ...mockComentario,
-        usuario: mockUsuario,
-      });
+      expect(result).toEqual(mockComentarioWithUsuario);
     });
 
     it('deve lançar uma exceção NotFoundException se o comentário não for encontrado', async () => {
@@ -149,9 +158,9 @@ describe('ComentariosService', () => {
 
       const result = await service.update(1, updateComentarioDto);
 
-      expect(comentarioRepository.merge).toHaveBeenCalledWith(mockComentario, updateComentarioDto);
-      expect(comentarioRepository.save).toHaveBeenCalledWith(mockComentario);
-      expect(result).toEqual(mockComentario);
+      expect(comentarioRepository.merge).toHaveBeenCalledWith(mockComentarioWithUsuario, updateComentarioDto);
+      expect(comentarioRepository.save).toHaveBeenCalledWith(mockComentarioWithUsuario);
+      expect(result).toEqual(mockComentarioWithUsuario);
     });
   });
 
@@ -162,7 +171,7 @@ describe('ComentariosService', () => {
       expect(comentarioRepository.findOneOrFail).toHaveBeenCalledWith({
         where: { id: 1 },
       });
-      expect(comentarioRepository.remove).toHaveBeenCalledWith(mockComentario);
+      expect(comentarioRepository.remove).toHaveBeenCalledWith(mockComentarioWithUsuario);
     });
   });
 });

@@ -107,7 +107,7 @@ describe('PublicacaoService', () => {
     const pagination: Pagination = new Pagination(paginate);
 
     it('should findAll Publicacao', async () => {
-      // Mock do repositório
+
       jest.spyOn(repository, 'createQueryBuilder').mockReturnValue({
         where: jest.fn().mockReturnThis(),
         limit: jest.fn().mockReturnThis(),
@@ -116,7 +116,7 @@ describe('PublicacaoService', () => {
         getManyAndCount: jest.fn().mockResolvedValue([[publicacao], 1]), // Retorna uma publicação e total = 1
       } as any);
 
-      // Mock do clientProxy para retornar um array de usuários
+
       jest.spyOn(clientProxy, 'send').mockReturnValue(
         of([{ id: 1, nome: 'Usuário Teste' }]), // Retorna um usuário com id = 1
       );
@@ -131,7 +131,7 @@ describe('PublicacaoService', () => {
         usuario: { id: 1, nome: 'Usuário Teste' }, // Usuário mockado
       });
 
-      // Verifica se o clientProxy.send foi chamado corretamente
+
       expect(clientProxy.send).toHaveBeenCalledWith(
         { role: 'info', cmd: 'getAll' },
         { ids: [publicacao.idUsuario] },
@@ -148,7 +148,7 @@ describe('PublicacaoService', () => {
         getManyAndCount: jest.fn().mockResolvedValue([[publicacao], 1]), // Retorna uma publicação e total = 1
       } as any);
 
-      // Mock do clientProxy para retornar um array de usuários
+
       jest.spyOn(clientProxy, 'send').mockReturnValue(
         of([{ id: 1, nome: 'Usuário Teste' }]), // Retorna um usuário com id = 1
       );
@@ -159,15 +159,14 @@ describe('PublicacaoService', () => {
         pagination,
       );
 
-      // Verificações
+   
       expect(count).toEqual(1);
       expect(pageSize).toEqual(1); // pageSize deve ser igual ao total
       expect(data[0]).toEqual({
         ...publicacao,
-        usuario: { id: 1, nome: 'Usuário Teste' }, // Usuário mockado
+        usuario: { id: 1, nome: 'Usuário Teste' },
       });
 
-      // Verifica se o clientProxy.send foi chamado corretamente
       expect(clientProxy.send).toHaveBeenCalledWith(
         { role: 'info', cmd: 'getAll' },
         { ids: [publicacao.idUsuario] },
@@ -175,7 +174,7 @@ describe('PublicacaoService', () => {
     });
 
     it('should findAll Publicacao with title unaccent', async () => {
-      // Mock do repositório
+
       jest.spyOn(repository, 'createQueryBuilder').mockReturnValue({
         where: jest.fn().mockReturnThis(),
         limit: jest.fn().mockReturnThis(),
@@ -184,7 +183,7 @@ describe('PublicacaoService', () => {
         getManyAndCount: jest.fn().mockResolvedValue([[publicacao], 1]), // Retorna uma publicação e total = 1
       } as any);
 
-      // Mock do clientProxy para retornar um array de usuários
+
       jest.spyOn(clientProxy, 'send').mockReturnValue(
         of([{ id: 1, nome: 'Usuário Teste' }]), // Retorna um usuário com id = 1
       );
@@ -195,15 +194,14 @@ describe('PublicacaoService', () => {
         pagination,
       );
 
-      // Verificações
       expect(count).toEqual(1);
-      expect(pageSize).toEqual(1); // pageSize deve ser igual ao total
+      expect(pageSize).toEqual(1); 
       expect(data[0]).toEqual({
         ...publicacao,
         usuario: { id: 1, nome: 'Usuário Teste' }, // Usuário mockado
       });
 
-      // Verifica se o clientProxy.send foi chamado corretamente
+
       expect(clientProxy.send).toHaveBeenCalledWith(
         { role: 'info', cmd: 'getAll' },
         { ids: [publicacao.idUsuario] },
