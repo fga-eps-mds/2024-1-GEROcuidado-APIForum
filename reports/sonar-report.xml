@@ -1,55 +1,57 @@
 <testExecutions version="1">
+<file path="src\publicacao\comentario.service.spec.ts">
+</file>
 <file path="src\publicacao\publicacao.service.spec.ts">
-<testCase name="PublicacaoService should be defined" duration="16">
+<testCase name="PublicacaoService should be defined" duration="23">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.service.spec.ts:38:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoService should create Publicacao" duration="5">
+<testCase name="PublicacaoService should create Publicacao" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.service.spec.ts:38:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoService should find Publicacao" duration="4">
+<testCase name="PublicacaoService should find Publicacao" duration="2">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.service.spec.ts:38:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoService should remove Publicacao" duration="4">
+<testCase name="PublicacaoService should remove Publicacao" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.service.spec.ts:38:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoService should update Publicacao" duration="29">
+<testCase name="PublicacaoService should update Publicacao" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.service.spec.ts:38:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoService findAll should findAll Publicacao" duration="6">
+<testCase name="PublicacaoService findAll should findAll Publicacao" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.service.spec.ts:38:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoService findAll should findAll Publicacao with isReported" duration="3">
+<testCase name="PublicacaoService findAll should findAll Publicacao with isReported" duration="4">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.service.spec.ts:38:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoService findAll should findAll Publicacao with title unaccent" duration="2">
+<testCase name="PublicacaoService findAll should findAll Publicacao with title unaccent" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
@@ -65,14 +67,14 @@
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.controller.spec.ts:47:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoController should create Publicacao" duration="3">
+<testCase name="PublicacaoController should create Publicacao" duration="7">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.controller.spec.ts:47:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoController should find Publicacao" duration="2">
+<testCase name="PublicacaoController should find Publicacao" duration="13">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
@@ -86,14 +88,14 @@
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.controller.spec.ts:47:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoController should update Publicacao" duration="4">
+<testCase name="PublicacaoController should update Publicacao" duration="2">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\publicacao\publicacao.controller.spec.ts:47:35)]]></failure>
 </testCase>
-<testCase name="PublicacaoController findAll should findAll Publicacao" duration="4">
+<testCase name="PublicacaoController findAll should findAll Publicacao" duration="2">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
@@ -105,33 +107,33 @@
 <testCase name="Where Clause EQUAL should return empty string if value is undefined" duration="1" />
 <testCase name="Where Clause EQUAL should return where string based on given value and tableColumn" duration="1" />
 <testCase name="Where Clause STRING should return empty string if value is undefined" duration="1" />
-<testCase name="Where Clause STRING should return empty string if value has no length" duration="0" />
-<testCase name="Where Clause STRING should return where string based on given value and tableColumn" duration="2" />
-<testCase name="Where Clause NUMBER should return empty string if value is undefined" duration="1" />
+<testCase name="Where Clause STRING should return empty string if value has no length" duration="1" />
+<testCase name="Where Clause STRING should return where string based on given value and tableColumn" duration="0" />
+<testCase name="Where Clause NUMBER should return empty string if value is undefined" duration="0" />
 <testCase name="Where Clause NUMBER should return where string based on given value and tableColumn" duration="0" />
 <testCase name="Where Clause BOOLEAN should return empty string if value is undefined" duration="0" />
-<testCase name="Where Clause BOOLEAN should return empty string if value is higher than 1" duration="1" />
-<testCase name="Where Clause BOOLEAN should return where string based on given value and tableColumn" duration="1" />
-<testCase name="Where Clause ARRAY NUMBER should return empty string if value is undefined" duration="0" />
-<testCase name="Where Clause ARRAY NUMBER should return where string if value is number" duration="0" />
-<testCase name="Where Clause ARRAY NUMBER should return where string if value is number array" duration="1" />
+<testCase name="Where Clause BOOLEAN should return empty string if value is higher than 1" duration="0" />
+<testCase name="Where Clause BOOLEAN should return where string based on given value and tableColumn" duration="0" />
+<testCase name="Where Clause ARRAY NUMBER should return empty string if value is undefined" duration="1" />
+<testCase name="Where Clause ARRAY NUMBER should return where string if value is number" duration="1" />
+<testCase name="Where Clause ARRAY NUMBER should return where string if value is number array" duration="0" />
 </file>
 <file path="src\config\db\db.service.spec.ts">
-<testCase name="DbService should be defined" duration="18">
+<testCase name="DbService should be defined" duration="5">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\config\db\db.service.spec.ts:29:35)]]></failure>
 </testCase>
-<testCase name="DbService should return db config development" duration="5">
+<testCase name="DbService should return db config development" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\config\db\db.service.spec.ts:29:35)]]></failure>
 </testCase>
-<testCase name="DbService should return db config production" duration="4">
+<testCase name="DbService should return db config production" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
@@ -154,14 +156,14 @@
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\autenticacao.guard.spec.ts:28:35)]]></failure>
 </testCase>
-<testCase name="AutenticacaoGuard should pass if authentication is successful" duration="1">
+<testCase name="AutenticacaoGuard should pass if authentication is successful" duration="3">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
     at TestingModuleBuilder.compile (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-module.builder.js:47:9)
     at Object.&lt;anonymous&gt; (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\src\autenticacao.guard.spec.ts:28:35)]]></failure>
 </testCase>
-<testCase name="AutenticacaoGuard should not pass if authentication is unsuccessful" duration="2">
+<testCase name="AutenticacaoGuard should not pass if authentication is unsuccessful" duration="4">
 <failure message="Error"><![CDATA[TypeError: Cannot read properties of undefined (reading &apos;inspectModules&apos;)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\core\injector\instance-loader.js:25:33)
     at TestingInstanceLoader.createInstancesOfDependencies (C:\Users\Merli\Desktop\MDS\2024-2-GEROcuidado-APIForum\node_modules\@nestjs\testing\testing-instance-loader.js:14:9)
@@ -171,69 +173,69 @@
 </file>
 <file path="src\shared\decorators\paginate.decorator.spec.ts">
 <testCase name="Pagination should be defined" duration="1" />
-<testCase name="Pagination should be Paginate" duration="2" />
-<testCase name="Pagination should be Paginate not limit" duration="1" />
-<testCase name="Pagination should be Paginate not offset" duration="1" />
+<testCase name="Pagination should be Paginate" duration="1" />
+<testCase name="Pagination should be Paginate not limit" duration="0" />
+<testCase name="Pagination should be Paginate not offset" duration="0" />
 </file>
 <file path="src\shared\interceptors\data-transform.interceptor.spec.ts">
-<testCase name="DataTransformInterceptor should be defined" duration="1" />
-<testCase name="DataTransformInterceptor should be intercept t1" duration="3" />
-<testCase name="DataTransformInterceptor should be intercept should formatData with message" duration="0" />
-<testCase name="DataTransformInterceptor should be intercept should formatData with no message" duration="0" />
+<testCase name="DataTransformInterceptor should be defined" duration="15" />
+<testCase name="DataTransformInterceptor should be intercept t1" duration="2" />
+<testCase name="DataTransformInterceptor should be intercept should formatData with message" duration="1" />
+<testCase name="DataTransformInterceptor should be intercept should formatData with no message" duration="1" />
 <testCase name="DataTransformInterceptor should be intercept should formatData with Paginate" duration="1" />
 </file>
 <file path="src\shared\helpers\buffer-to-image.spec.ts">
 <testCase name="Buffer to image bufferToBase64 should be bufferToBase64 a image" duration="1" />
 <testCase name="Buffer to image bufferToBase64 should be bufferToBase64 a empty if null" duration="1" />
 <testCase name="Buffer to image bufferToBase64 should be bufferToBase64 a empty if not image" duration="1" />
-<testCase name="Buffer to image isBase64 should be false" duration="1" />
+<testCase name="Buffer to image isBase64 should be false" duration="0" />
 <testCase name="Buffer to image isBase64 should be true" duration="1" />
-<testCase name="Buffer to image isBase64Image should be false" duration="1" />
+<testCase name="Buffer to image isBase64Image should be false" duration="3" />
 <testCase name="Buffer to image isBase64Image should be true" duration="1" />
 </file>
 <file path="src\shared\filters\all-exceptions.filter.spec.ts">
 <testCase name="AllExceptionsFilter should be defined" duration="1" />
-<testCase name="AllExceptionsFilter should be catch" duration="2" />
-<testCase name="AllExceptionsFilter should be not exception to class-validator" duration="6" />
+<testCase name="AllExceptionsFilter should be catch" duration="1" />
+<testCase name="AllExceptionsFilter should be not exception to class-validator" duration="0" />
 <testCase name="AllExceptionsFilter should be not exception only message" duration="0" />
 </file>
 <file path="src\shared\classes\http-response.spec.ts">
 <testCase name="HttpResponse should be defined" duration="2" />
-<testCase name="HttpResponse should create message with payload text" duration="1" />
-<testCase name="HttpResponse should create message with success text" duration="0" />
-<testCase name="HttpResponse should create message with updated text" duration="1" />
-<testCase name="HttpResponse should create message with deleted text" duration="1" />
+<testCase name="HttpResponse should create message with payload text" duration="0" />
+<testCase name="HttpResponse should create message with success text" duration="1" />
+<testCase name="HttpResponse should create message with updated text" duration="0" />
+<testCase name="HttpResponse should create message with deleted text" duration="0" />
 </file>
 <file path="src\shared\decorators\ordenate.decorator.spec.ts">
-<testCase name="Pagination should be defined" duration="2" />
-<testCase name="Pagination should be Paginate" duration="1" />
-<testCase name="Pagination should be Paginate not limit" duration="1" />
-<testCase name="Pagination should be Paginate not offset" duration="1" />
-<testCase name="Ordenate should return default object if there is no JSON" duration="2" />
-<testCase name="Ordenate should return OrderParams object with values for order" duration="1" />
+<testCase name="Pagination should be defined" duration="1" />
+<testCase name="Pagination should be Paginate" duration="0" />
+<testCase name="Pagination should be Paginate not limit" duration="0" />
+<testCase name="Pagination should be Paginate not offset" duration="0" />
+<testCase name="Ordenate should return default object if there is no JSON" duration="1" />
+<testCase name="Ordenate should return OrderParams object with values for order" duration="17" />
 <testCase name="Ordenate should return default values when obj has empty props" duration="1" />
-<testCase name="Ordenate should be Ordenate using factory" duration="2" />
+<testCase name="Ordenate should be Ordenate using factory" duration="0" />
 </file>
 <file path="src\shared\decorators\filtrate.decorator.spec.ts">
-<testCase name="Pagination should be defined" duration="0" />
-<testCase name="Pagination should be Paginate" duration="1" />
-<testCase name="Pagination should be Paginate not limit" duration="1" />
+<testCase name="Pagination should be defined" duration="1" />
+<testCase name="Pagination should be Paginate" duration="0" />
+<testCase name="Pagination should be Paginate not limit" duration="0" />
 <testCase name="Pagination should be Paginate not offset" duration="1" />
-<testCase name="Filtrate should return empty object for filter" duration="0" />
+<testCase name="Filtrate should return empty object for filter" duration="1" />
 <testCase name="Filtrate should return TestFilterProps object with values for filter" duration="1" />
 <testCase name="Filtrate should be Filtrate using factory" duration="1" />
 </file>
 <file path="src\shared\helpers\commons.spec.ts">
-<testCase name="Helper deve criar um hash com tamanho default" duration="3" />
+<testCase name="Helper deve criar um hash com tamanho default" duration="2" />
 <testCase name="Helper should be return if its nill for undefined" duration="1" />
 <testCase name="Helper should be return if its nill for null" duration="1" />
-<testCase name="Helper should be isJsonObject to be true" duration="1" />
+<testCase name="Helper should be isJsonObject to be true" duration="0" />
 <testCase name="Helper should be isJsonObject to be false" duration="0" />
-<testCase name="Helper should be isJsonObject to be false in not parse" duration="1" />
+<testCase name="Helper should be isJsonObject to be false in not parse" duration="0" />
 </file>
 <file path="src\shared\decorators\filtrate-string.spec.ts">
-<testCase name="Pagination should be defined" duration="1" />
-<testCase name="Pagination should be Paginate" duration="1" />
+<testCase name="Pagination should be defined" duration="8" />
+<testCase name="Pagination should be Paginate" duration="2" />
 <testCase name="Pagination should be Paginate not limit" duration="1" />
 <testCase name="Pagination should be Paginate not offset" duration="1" />
 <testCase name="FiltrateString should return empty object for filter" duration="1" />
