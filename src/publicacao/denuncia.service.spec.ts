@@ -1,7 +1,8 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PublicacaoService } from '../publicacao/publicacao.service'; // Importe o PublicacaoService
+import { PublicacaoService } from '../publicacao/publicacao.service';
 import { Ordering } from '../shared/decorators/ordenate.decorator';
 import { Pagination } from '../shared/decorators/paginate.decorator';
 import { ResponsePaginate } from '../shared/interfaces/response-paginate.interface';
@@ -13,14 +14,14 @@ import { Denuncia } from './entities/denuncia.entity';
 describe('DenunciaService', () => {
   let service: DenunciaService;
   let repository: Repository<Denuncia>;
-  let publicacaoService: PublicacaoService; // Declare o PublicacaoService
+  let publicacaoService: PublicacaoService;
 
   const mockDenuncia: Denuncia = {
     id: 1,
     idUsuario: 1,
     motivo: 'Conteúdo inadequado',
     descricao: 'Descrição da denúncia',
-    dataHora: new Date(),
+    dataHora: new Date(), // Garantir que dataHora seja um Date
   };
 
   const mockResponsePaginate: ResponsePaginate<Denuncia[]> = {
@@ -37,7 +38,15 @@ describe('DenunciaService', () => {
           provide: getRepositoryToken(Denuncia),
           useValue: {
             create: jest.fn().mockReturnValue(mockDenuncia),
-            save: jest.fn().mockResolvedValue(mockDenuncia),
+            save: jest.fn().mockImplementation((entity) => {
+              // Converte dataHora para Date se for uma string
+              if (entity.dataHora && typeof entity.dataHora === 'string') {
+                entity.dataHora = new Date(entity.dataHora);
+              }
+              return Promise.resolve(entity);
+            }),
+            find: jest.fn().mockResolvedValue([mockDenuncia]),
+            findOne: jest.fn().mockResolvedValue(mockDenuncia),
             findOneOrFail: jest.fn().mockResolvedValue(mockDenuncia),
             createQueryBuilder: jest.fn(() => ({
               leftJoinAndSelect: jest.fn().mockReturnThis(),
@@ -46,13 +55,21 @@ describe('DenunciaService', () => {
               orderBy: jest.fn().mockReturnThis(),
               getManyAndCount: jest.fn().mockResolvedValue([[mockDenuncia], 1]),
             })),
+            merge: jest.fn().mockImplementation((entity, dto) => {
+              const updatedEntity = { ...entity, ...dto };
+              // Converte dataHora para Date se for uma string
+              if (dto.dataHora && typeof dto.dataHora === 'string') {
+                updatedEntity.dataHora = new Date(dto.dataHora);
+              }
+              return updatedEntity;
+            }),
             remove: jest.fn().mockResolvedValue(undefined),
           },
         },
         {
-          provide: PublicacaoService, // Adicione o PublicacaoService como provedor
+          provide: PublicacaoService,
           useValue: {
-            findOne: jest.fn().mockResolvedValue({ id: 1 }), // Mock do método findOne
+            findOne: jest.fn().mockResolvedValue({ id: 1 }), // Simula uma publicação existente
           },
         },
       ],
@@ -60,7 +77,7 @@ describe('DenunciaService', () => {
 
     service = module.get<DenunciaService>(DenunciaService);
     repository = module.get<Repository<Denuncia>>(getRepositoryToken(Denuncia));
-    publicacaoService = module.get<PublicacaoService>(PublicacaoService); // Obtenha a instância do PublicacaoService
+    publicacaoService = module.get<PublicacaoService>(PublicacaoService);
   });
 
   it('deve estar definido', () => {
@@ -73,25 +90,44 @@ describe('DenunciaService', () => {
         idUsuario: 1,
         motivo: 'Conteúdo inadequado',
         descricao: 'Descrição da denúncia',
-        dataHora: new Date().toISOString(),
-        publicacaoId: 1, // Adicionando a propriedade publicacaoId
+        dataHora: new Date().toISOString(), // Passa como string
+        publicacaoId: 1,
       };
 
       const result = await service.create(createDenunciaDto);
 
-      expect(publicacaoService.findOne).toHaveBeenCalledWith(1); // Verifique se o método findOne foi chamado
-      expect(repository.create).toHaveBeenCalledWith(createDenunciaDto);
+      expect(publicacaoService.findOne).toHaveBeenCalledWith(1);
+      expect(repository.create).toHaveBeenCalledWith({
+        ...createDenunciaDto,
+        dataHora: new Date(createDenunciaDto.dataHora), // Verifica se foi convertido para Date
+      });
       expect(repository.save).toHaveBeenCalledWith(mockDenuncia);
       expect(result).toEqual(mockDenuncia);
     });
 
-    it('deve lançar um erro se ocorrer um problema ao salvar a denúncia', async () => {
+    it('deve lançar uma exceção se a publicação não for encontrada', async () => {
       const createDenunciaDto: CreateDenunciaDto = {
         idUsuario: 1,
         motivo: 'Conteúdo inadequado',
         descricao: 'Descrição da denúncia',
         dataHora: new Date().toISOString(),
-        publicacaoId: 1, // Adicionando a propriedade publicacaoId
+        publicacaoId: 999, // ID inexistente
+      };
+
+      jest.spyOn(publicacaoService, 'findOne').mockResolvedValue(null as any);
+
+      await expect(service.create(createDenunciaDto)).rejects.toThrowError(
+        NotFoundException,
+      );
+    });
+
+    it('deve lançar uma exceção se ocorrer um erro ao salvar a denúncia', async () => {
+      const createDenunciaDto: CreateDenunciaDto = {
+        idUsuario: 1,
+        motivo: 'Conteúdo inadequado',
+        descricao: 'Descrição da denúncia',
+        dataHora: new Date().toISOString(),
+        publicacaoId: 1,
       };
 
       jest.spyOn(repository, 'save').mockRejectedValue(new Error('Erro ao salvar denúncia'));
@@ -128,13 +164,13 @@ describe('DenunciaService', () => {
       expect(result).toEqual(mockDenuncia);
     });
 
-    it('deve lançar um erro se a denúncia não for encontrada', async () => {
+    it('deve lançar uma exceção se a denúncia não for encontrada', async () => {
       jest
         .spyOn(repository, 'findOneOrFail')
-        .mockRejectedValue(new Error('Denúncia não encontrada!'));
+        .mockRejectedValue(new NotFoundException('Denúncia não encontrada!'));
 
-      await expect(service.findOne(1)).rejects.toThrowError(
-        'Denúncia não encontrada!',
+      await expect(service.findOne(999)).rejects.toThrowError(
+        NotFoundException,
       );
     });
   });
@@ -143,22 +179,44 @@ describe('DenunciaService', () => {
     it('deve atualizar uma denúncia com sucesso', async () => {
       const updateDenunciaDto: UpdateDenunciaDto = {
         motivo: 'Conteúdo ofensivo',
+        dataHora: new Date().toISOString(), // Passa como string
       };
+
+      // Cria uma cópia do mockDenuncia com as atualizações do DTO
+      const updatedDenuncia = {
+        ...mockDenuncia,
+        ...updateDenunciaDto,
+        dataHora: updateDenunciaDto.dataHora ? new Date(updateDenunciaDto.dataHora) : mockDenuncia.dataHora, // Converte para Date se definido
+      };
+
+      // Mock do merge para retornar a denúncia atualizada
+      jest.spyOn(repository, 'merge').mockReturnValue(updatedDenuncia);
+
+      // Mock do save para retornar a denúncia atualizada
+      jest.spyOn(repository, 'save').mockResolvedValue(updatedDenuncia);
 
       const result = await service.update(1, updateDenunciaDto);
 
+      // Verifica se o método findOneOrFail foi chamado corretamente
       expect(repository.findOneOrFail).toHaveBeenCalledWith({ where: { id: 1 } });
-      expect(repository.save).toHaveBeenCalledWith(mockDenuncia);
-      expect(result).toEqual(mockDenuncia);
+
+      // Verifica se o merge foi chamado com a denúncia original e o DTO
+      expect(repository.merge).toHaveBeenCalledWith(mockDenuncia, updateDenunciaDto);
+
+      // Verifica se o save foi chamado com a denúncia atualizada
+      expect(repository.save).toHaveBeenCalledWith(updatedDenuncia);
+
+      // Verifica se o resultado é a denúncia atualizada
+      expect(result).toEqual(updatedDenuncia);
     });
 
-    it('deve lançar um erro se a denúncia não for encontrada', async () => {
+    it('deve lançar uma exceção se a denúncia não for encontrada', async () => {
       jest
         .spyOn(repository, 'findOneOrFail')
-        .mockRejectedValue(new Error('Denúncia não encontrada!'));
+        .mockRejectedValue(new NotFoundException('Denúncia não encontrada!'));
 
-      await expect(service.update(1, { motivo: 'Conteúdo ofensivo' })).rejects.toThrowError(
-        'Denúncia não encontrada!',
+      await expect(service.update(999, { motivo: 'Conteúdo ofensivo' })).rejects.toThrowError(
+        NotFoundException,
       );
     });
   });
@@ -171,13 +229,13 @@ describe('DenunciaService', () => {
       expect(repository.remove).toHaveBeenCalledWith(mockDenuncia);
     });
 
-    it('deve lançar um erro se a denúncia não for encontrada', async () => {
+    it('deve lançar uma exceção se a denúncia não for encontrada', async () => {
       jest
         .spyOn(repository, 'findOneOrFail')
-        .mockRejectedValue(new Error('Denúncia não encontrada!'));
+        .mockRejectedValue(new NotFoundException('Denúncia não encontrada!'));
 
-      await expect(service.remove(1)).rejects.toThrowError(
-        'Denúncia não encontrada!',
+      await expect(service.remove(999)).rejects.toThrowError(
+        NotFoundException,
       );
     });
   });
